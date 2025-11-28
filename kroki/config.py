@@ -11,7 +11,7 @@ from mkdocs.config.base import (
     ConfigWarnings as MkDocsConfigWarnings,
 )
 
-from kroki import version
+from kroki import __version__
 from kroki.logging import log
 
 
@@ -32,14 +32,16 @@ class DeprecatedDownloadImagesCompat(config_options.Deprecated):
 
 
 class KrokiPluginConfig(MkDocsBaseConfig):
-    ServerURL = config_options.URL(default=os.getenv("KROKI_SERVER_URL", "https://kroki.io"))
+    ServerURL = config_options.URL(
+        default=os.getenv("KROKI_SERVER_URL", "https://kroki.io")
+    )
     EnableBlockDiag = config_options.Type(bool, default=True)
     EnableBpmn = config_options.Type(bool, default=True)
     EnableExcalidraw = config_options.Type(bool, default=True)
     EnableMermaid = config_options.Type(bool, default=True)
     EnableDiagramsnet = config_options.Type(bool, default=False)
     HttpMethod = config_options.Choice(choices=["GET", "POST"], default="GET")
-    UserAgent = config_options.Type(str, default=f"{__name__}/{version}")
+    UserAgent = config_options.Type(str, default=f"{__name__}/{__version__}")
     FencePrefix = config_options.Type(str, default="kroki-")
     FileTypes = config_options.Type(list, default=["svg"])
     FileTypeOverrides = config_options.Type(dict, default={})
